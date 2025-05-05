@@ -73,3 +73,14 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`✅ Proxy listening on port ${port}`);
 });
+
+app.post('/upload', upload.single('pdf'), async (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ error: 'Aucun fichier reçu.' });
+    }
+  
+    const filePath = req.file.path;
+    // Traitement du fichier ici
+    res.json({ message: 'Fichier reçu avec succès', filePath });
+  });
+  
